@@ -6,12 +6,17 @@ import com.gebreselassie.service.EmployeeService;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Setter
 @Getter
+@Service
 public class EmployeeServiceImpl implements EmployeeService {
 
+    @Autowired
     private EmployeeDAO employeeDAO;
 
     @Override
