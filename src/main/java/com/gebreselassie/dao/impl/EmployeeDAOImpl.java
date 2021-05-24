@@ -29,7 +29,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public Employee getEmployeeById(int employeeId) {
-        return null;
+        String sql = "SELECT * FROM employee_table WHERE employee_id = ?";
+        Employee employee = jdbcTemplate.queryForObject(sql, new EmployeeRowMapper(), employeeId);
+        return employee;
     }
 
     @Override
