@@ -41,11 +41,15 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public void updateEmployeeEmailById(String newEmail, int employeeId) {
-
+        String sql = "UPDATE employee_table SET email = ? WHERE employee_id = ?";
+        int update = jdbcTemplate.update(sql, newEmail, employeeId);
+        if(update > 0)
+            System.out.println("Email is updated ...");
     }
 
     @Override
     public List<Employee> getAllEmployeesDetails() {
-        return null;
+        String sql = "SELECT * FROM employee_table";
+        return jdbcTemplate.query(sql, new EmployeeRowMapper());
     }
 }
