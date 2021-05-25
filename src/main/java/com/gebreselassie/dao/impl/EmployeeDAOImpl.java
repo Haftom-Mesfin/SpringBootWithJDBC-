@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
 @Component
 public class EmployeeDAOImpl implements EmployeeDAO {
 
@@ -36,16 +37,23 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public void deleteEmployeeById(int employeeId) {
-
+        String sql = "DELETE FROM employee_table WHERE employee_id = ?";
+        int result = jdbcTemplate.update(sql, employeeId);
+        if(result > 0)
+            System.out.println("Employee is deleted...");
     }
 
     @Override
     public void updateEmployeeEmailById(String newEmail, int employeeId) {
-
+        String sql = "UPDATE employee_table SET email = ? WHERE employee_id = ?";
+        int update = jdbcTemplate.update(sql, newEmail, employeeId);
+        if(update > 0)
+            System.out.println("Email is updated ...");
     }
 
     @Override
     public List<Employee> getAllEmployeesDetails() {
-        return null;
+        String sql = "SELECT * FROM employee_table";
+        return jdbcTemplate.query(sql, new EmployeeRowMapper());
     }
 }
