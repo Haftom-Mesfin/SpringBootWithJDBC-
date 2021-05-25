@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
 @Component
 public class EmployeeDAOImpl implements EmployeeDAO {
 
@@ -36,7 +37,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public void deleteEmployeeById(int employeeId) {
-
+        String sql = "DELETE FROM employee_table WHERE employee_id = ?";
+        int result = jdbcTemplate.update(sql, employeeId);
+        if(result > 0)
+            System.out.println("Employee is deleted...");
     }
 
     @Override
